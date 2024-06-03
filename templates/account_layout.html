@@ -6,14 +6,15 @@
                 <img src="{% static 'images/image1.png' %}" width="100%">
             </div>
             <div class="col-2">
+                {% if messages  %}
+                <div class="message-container">
+                    {% for message in messages %}
+                        <div class="{{ message.tags }}">{{message}}</div>
+                    {% endfor %}
+                </div>
+                <br>
+                {% endif %}
                 <div class="form-container">
-                    {% if messages  %}
-                    <div>
-                        {% for message in messages %}
-                            {{message}}
-                        {% endfor %}
-                    </div>
-                    {% endif %}
                     <div class="form-btn">
                         <span onclick="login()">Login</span>
                         <span onclick="register()">Register</span>

@@ -397,6 +397,27 @@ th:last-child{
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
+
+.message-container{
+    background: #fff;
+    width: 300px;
+    color: red;
+    height: fit-content;
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}s
+.error {
+    color: red;
+}
+.success {
+    color: green;
+}
+
 .form-container span{
     font-weight: bold;
     padding: 0 10px;
