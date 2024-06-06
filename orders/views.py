@@ -37,3 +37,11 @@ def add_to_cart(request):
             ordered_item.quantity += quantity
             ordered_item.save()
         return redirect('cart_details')
+    
+
+def remove_item(request, pk):
+    item = OrderItem.objects.get(pk=pk)
+    if item:
+        item.delete()
+    
+    return redirect('cart_details')

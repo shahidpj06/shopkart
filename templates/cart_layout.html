@@ -1,6 +1,10 @@
 {% load static %}
+{% load multiply %}
+{% load get_total %}
+{% load tax %}
+{% load final_amount %}
 <div class="small-container cart-page">
-    {% if cart_obj %}
+    {% if cart_obj and cart_obj.added_items.all %}
     <table>
         <tbody><tr>
             <th>Product</th>
@@ -16,12 +20,12 @@
                         <p>{{ cart.product.title }}</p>
                         <small>Price: ₹{{ cart.product.price }}</small>
                         <br>
-                        <a href="">Remove</a>
+                        <a href="{% url 'remove_item' cart.id %}">Remove</a>
                     </div>
                 </div>
             </td>
             <td><input type="number" disabled value="{{ cart.quantity }}"></td>
-            <td>₹{{ cart.product.price }}</td>
+            <td>₹{% multiply cart.product.price cart.quantity %}</td>
         </tr>
         {% endfor %}
     </tbody></table>
@@ -29,15 +33,15 @@
         <table>
             <tbody><tr>
                 <td>Subtotal</td>
-                <td>$200.00</td>
+                <td>₹{% get_total cart_obj %}</td>
             </tr>
             <tr>
-                <td>Tax</td>
-                <td>$35.00</td>
+                <td>Tax/GST</td>
+                <td>₹{% tax cart_obj %}</td>
             </tr>
             <tr>
                 <td>Total</td>
-                <td>$230.00</td>
+                <td>₹{% final_amount cart_obj %}</td>
             </tr>
             <tr>
                 <td colspan="2"></td>
@@ -54,7 +58,12 @@
             </tr>
         </tbody></table>
     </div>
+    <div>
     {% else %}
-    <h2>Oops! Your cart is empty</h2>
+    <h2 style="display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center; height: 199px;">Oops! Your cart is empty.</h2>
     {% endif %}
+    </div>
 </div>
