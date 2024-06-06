@@ -20,10 +20,14 @@ class Order(models.Model):
     )
 
     owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, related_name='orders', null=True)
+    total_price = models.FloatField(default=0)
     delete_status = models.IntegerField(choices=DELETE_CHOICES, default=LIVE)
     order_status = models.IntegerField(choices=STATUS_CHOICE, default=CART_STAGE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "order-{}-{}".format(self.id, self.owner.user.username)
 
 
 # model for ordered items with quantity and product. Each cart has multiple items

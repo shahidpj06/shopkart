@@ -1,6 +1,13 @@
 {% extends 'blank_layout.html' %}
 {% load static %}
 
- {% block cart_layout %}
- {% include 'cart_layout.html' %}
- {% endblock cart_layout %}
+{% block content %}
+{% if messages  %}
+    {% for message in messages %}
+        <div style="height: 359px; display: flex; justify-content: center; align-items: center;
+        font-size: x-large; font-weight: 400;" class="{{ message.tags }}">{{message}}</div>
+    {% endfor %}
+{% else %}    
+        {% include 'cart_layout.html' %}
+{% endif %}
+{% endblock content %}

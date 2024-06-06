@@ -3,6 +3,8 @@
 {% load get_total %}
 {% load tax %}
 {% load final_amount %}
+
+
 <div class="small-container cart-page">
     {% if cart_obj and cart_obj.added_items.all %}
     <table>
@@ -45,16 +47,15 @@
             </tr>
             <tr>
                 <td colspan="2"></td>
-                <td><button style="border-radius: 5px; background-color: #ff523b; padding: 10px;
-                    text-align: center;
-                    color: white;
-                    border-color: white;
-                    font-family: 'Poppins', sans-serif;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 14px;
-                    margin: 1px 1px;
-                    cursor: pointer;">Confirm Order</button></td>
+                <form method="post" action="{% url 'checkout_item' %}" enctype="multipart/form-data"  >
+                    {% csrf_token %}
+                    <input type="hidden" name="total" value="{% final_amount cart_obj %}">
+                    <td><button style="border-radius: 30px; background-color: #ff523b; padding: 10px;
+                        text-align: center; color: white; border-color: white; font-family: 'Poppins', sans-serif; text-decoration: none;
+                        display: inline-block; font-size: 14px; margin: 1px 1px;box-shadow: none;
+                        cursor: pointer;" type="submit">Checkout</button></td>
+
+                </form>    
             </tr>
         </tbody></table>
     </div>
@@ -67,3 +68,4 @@
     {% endif %}
     </div>
 </div>
+
