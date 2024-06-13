@@ -27,7 +27,7 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "order-{}-{}".format(self.id, self.owner.user.username)
+        return "order-{}-{}".format(self.id, self.owner)
 
 
 # model for ordered items with quantity and product. Each cart has multiple items

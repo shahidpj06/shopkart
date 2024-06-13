@@ -24,7 +24,7 @@ def show_account(request):
             customer = Customer.objects.create(
                 name = username,
                 user = user,
-                address = address,
+                address = address,                                 
                 phone = phone
             )
             success_message = "User registered successfully"
