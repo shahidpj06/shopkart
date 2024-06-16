@@ -1,29 +1,35 @@
 {% load static %}
+<style>
+    .small-img-col {
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .small-img-row {
+        display: flex;
+        justify-content: space-between;
+    }
+    .small-img {
+        cursor: pointer;
+    }
+</style>
 <div class="small-container single-product">
     <div class="row">
         <div class="col-2">
-            <img src="{{ product.image.url }}" width="100%" id="ProductImg">
+            <img src="{{ product_images.0.image.url }}" width="100%" id="ProductImg">
 
             <div class="small-img-row">
-                <!-- <div class="small-img-col">
-                    <img src="{% static 'images/gallery-1.jpg' %}" width="100%" class="small-img">
-                </div>
-                <div class="small-img-col">
-                    <img src="{% static 'images/gallery-2.jpg' %}" width="100%" class="small-img">
-                </div>
-                <div class="small-img-col">
-                    <img src="{% static 'images/gallery-3.jpg' %}" width="100%" class="small-img">
-                </div>
-                <div class="small-img-col">
-                    <img src="{% static 'images/gallery-4.jpg' %}" width="100%" class="small-img">
-                </div> -->
+                {% for image in product_images %}
+                    <div class="small-img-col">
+                        <img src="{{ image.image.url }}" width="100%" class="small-img" onclick="changeProductImage(this)">
+                    </div>
+                {% endfor %}
             </div>
-
         </div>
+
         <div class="col-2">
-            <p>{{product.title}}</p>
+            <p>{{product.brand}}</p>
             <h1>{{product.title}}</h1>
-            <h4>{{product.price}}</h4>
+            <h4>₹{{product.price|floatformat:0}}</h4>
             <form method="post" action="{% url 'add_to_cart' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" value="{{product.id}}" name="product_id"/>
@@ -36,3 +42,29 @@
         </div>
     </div>
 </div>
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Featured Products</h2>
+        <!-- <p>View More</p> -->
+    </div>
+</div>
+<!-- Products -->
+<div class="small-container">
+    <div class="row">
+        {% for feat_prd in featured_products %}
+        <div class="col-4">
+            <a href="{% url 'product_details' feat_prd.id %}"><img src="{{feat_prd.image.url}}"></a>
+            <h4><b>{{feat_prd.brand}}</b></h4>
+            <h4>{{feat_prd.title}}</h4>
+            <p><b>{{feat_prd.price}}</b></p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function changeProductImage(smallImg) {
+        var mainProductImg = document.getElementById("ProductImg");
+        mainProductImg.src = smallImg.src;
+    }
+</script>

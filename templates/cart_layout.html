@@ -50,7 +50,7 @@
                 <form method="post" action="{% url 'checkout_item' %}" enctype="multipart/form-data"  >
                     {% csrf_token %}
                     <input type="hidden" name="total" value="{% final_amount cart_obj %}">
-                    <td><button style="border-radius: 30px; background-color: #ff523b; padding: 10px;
+                    <td><button style="border-radius: 30px; background-color: rgb(54, 67, 186); padding: 10px;
                         text-align: center; color: white; border-color: white; font-family: 'Poppins', sans-serif; text-decoration: none;
                         display: inline-block; font-size: 14px; margin: 1px 1px;box-shadow: none;
                         cursor: pointer;" type="submit">Checkout</button></td>

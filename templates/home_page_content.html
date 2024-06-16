@@ -26,33 +26,51 @@
         {% for feat_prd in featured_products %}
         <div class="col-4">
             <a href="{% url 'product_details' feat_prd.id %}"><img src="{{feat_prd.image.url}}"></a>
+            <h4><b>{{feat_prd.brand}}</b></h4>
             <h4>{{feat_prd.title}}</h4>
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-            <p>{{feat_prd.price}}</p>
+            <p><b>₹{{feat_prd.price|floatformat:0}}</b></p>
         </div>
         {% endfor %}
     </div>
+</div>    
+
+<div class="offer">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-2">
+                <img src="{{offer_product_image.image.url}}" class="offer-img">
+            </div>
+            <div class="col-2">
+                <p>Exclusively Available on Shopkart</p>
+                <h1>{{ offer_product.title }}</h1>
+                <small>{{ offer_product.description }}<br></small>
+                <h2></h2>
+                <a href="{% url 'product_details' offer_product.pk %}" class="btn">Buy Now  &#8594;</a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="small-container">
     <h2 class="title">Latest Products</h2>
     <div class="row">
         {% for lst_prd in latest_products %}
         <div class="col-4">
             <a href="{% url 'product_details' lst_prd.id %}"><img src="{{lst_prd.image.url}}"></a>
+            <h4><b>{{lst_prd.brand}}</b></h4>
             <h4>{{lst_prd.title}}</h4>
-            <div class="rating">
+            <!-- <div class="rating">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star-o"></i>
-            </div>
-            <p>{{lst_prd.price}}</p>
+            </div> -->
+            <p><b>₹{{lst_prd.price|floatformat:0}}</b></p>
         </div>
         {% endfor %}
     </div> 
 </div>
+
