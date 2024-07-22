@@ -5,6 +5,19 @@
     </div>
     <nav>
         <ul id="MenuItems">
+            <li>
+                <div class="wrap">
+                    <form method="post" action="{% url 'search_product' %}">
+                        {% csrf_token %}
+                        <div class="search">
+                        <input type="text" name="search" class="searchTerm" placeholder="What are you looking for?">
+                        <button type="submit" class="searchButton">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        </div>
+                    </form>
+                </div>
+            </li>
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'list_products' %}">Products</a></li>
             {% if not user.is_authenticated %}

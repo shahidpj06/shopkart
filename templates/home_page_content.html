@@ -1,22 +1,5 @@
 {% load static %}
 
-<!-- Feadtued Categories -->
-
-<div class="categories">
-    <!-- <div class="small-container">
-        <div class="row">
-            <div class="col-3">
-                <img src="{% static 'images/category-1.jpg' %}">
-            </div>
-            <div class="col-3">
-                <img src="{% static 'images/category-2.jpg' %}">
-            </div>
-            <div class="col-3">
-                <img src="{% static 'images/category-3.jpg' %}">
-            </div>
-        </div>
-    </div> -->
-</div>
 
 <!-- Featured Products -->
 
@@ -61,13 +44,6 @@
             <a href="{% url 'product_details' lst_prd.id %}"><img src="{{lst_prd.image.url}}"></a>
             <h4><b>{{lst_prd.brand}}</b></h4>
             <h4>{{lst_prd.title}}</h4>
-            <!-- <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div> -->
             <p><b>₹{{lst_prd.price|floatformat:0}}</b></p>
         </div>
         {% endfor %}

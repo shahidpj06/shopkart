@@ -1,0 +1,23 @@
+{% load static %}
+    <div class="small-container">
+        {% if search_bar %}
+        <h1>{{result_count}} Results Found</h1>
+        <div class="row">
+            {% for feat_prd in products %}
+            <div class="col-4">
+                <a href="{% url 'product_details' feat_prd.id %}"><img src="{{feat_prd.image.url}}"></a>
+                <h4><b>{{feat_prd.brand}}</b></h4>
+                <h4>{{feat_prd.title}}</h4>
+                <p><b>₹{{feat_prd.price|floatformat:0}}</b></p>
+            </div>
+            {% endfor %}
+        </div>
+
+                {% if not products %}
+                <h1 style="padding: 156px; display: flex; justify-content: center;">No results found.</h1>
+                {% endif %}
+        
+        {% else %}
+        <h1 style="padding: 156px; display: flex; justify-content: center;">Oops! You're not searched anything.</h1>
+        {% endif %}
+    </div>

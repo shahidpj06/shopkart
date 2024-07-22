@@ -4,7 +4,10 @@ from django.db import models
 class Product(models.Model):
     LIVE = 1
     DELETE = 0
-    DELETE_CHOICES = ((LIVE, 'Live'), (DELETE, 'Delete'))
+    DELETE_CHOICES = (
+        (LIVE, 'Live'),
+        (DELETE, 'Delete')
+        )
     title = models.CharField(max_length=255)
     brand = models.CharField(max_length=255, null=True)
     price = models.FloatField()

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from . models import Product
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 def index(request):
     featured_products = Product.objects.order_by('priority')[:4]
@@ -35,3 +36,18 @@ def product_details(request, pk):
         'product_images': product_images
     }
     return render(request, 'product_details.html', context)
+
+
+def search_product(request):
+    if request.method == 'POST':
+        search_bar = request.POST.get('search')
+        products = Product.objects.filter(Q(title__contains=search_bar) | Q(brand__contains=search_bar))
+        result_count = products.count()
+        context = {
+            'products': products,
+            'search_bar': search_bar,
+            'result_count': result_count
+        }
+        return render(request, 'search.html', context)
+    else:
+        return render(request, 'search.html')
