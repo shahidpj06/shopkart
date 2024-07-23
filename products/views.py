@@ -17,13 +17,25 @@ def index(request):
     return render(request, 'index.html', context)
 
 def list_products(request):
-    page = 1
-    if request.GET:
-        page = request.GET.get('page', 1)
-    products_list = Product.objects.order_by('priority')
+    page = request.GET.get('page', 1)
+    sort_option = request.GET.get('sort', 'priority')
+
+    if sort_option == 'low_price':
+        products_list = Product.objects.order_by('price')
+    elif sort_option == 'high_price':
+        products_list = Product.objects.order_by('-price')
+    elif sort_option == 'newest':
+        products_list = Product.objects.order_by('-created_at')
+    else:
+        products_list = Product.objects.order_by('priority')
+
     products_paginator = Paginator(products_list, 12)
     products_list = products_paginator.get_page(page)
-    context = {'products': products_list}
+
+    context = {
+        'products': products_list,
+        'sort': sort_option
+    }
     return render(request, 'products.html', context)
 
 def product_details(request, pk):
@@ -51,3 +63,18 @@ def search_product(request):
         return render(request, 'search.html', context)
     else:
         return render(request, 'search.html')
+    
+
+def product_sorting(request):
+    sort_option = request.GET.get('sort', 'default')
+
+    if sort_option == 'low_price':
+        products = Product.objects.all().order_by('price')
+    elif sort_option == 'high_price':
+        products = Product.objects.all().order_by('-price')
+    elif sort_option == 'newest':
+        products = Product.objects.all().order_by('-created_at')
+    else:
+        products = Product.objects.all()
+
+    return render(request, 'products.html', {'products': products})

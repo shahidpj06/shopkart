@@ -1,7 +1,11 @@
 {% load static %}
     <div class="small-container">
         {% if search_bar %}
-        <h1>{{result_count}} Results Found</h1>
+            {% if result_count == 0 %}
+            <h1 style="padding: 156px; display: flex; justify-content: center;" >No Results Found</h1>
+            {% else %}
+            <h1>{{result_count}} Results Found</h1>
+            {% endif %}
         <div class="row">
             {% for feat_prd in products %}
             <div class="col-4">
@@ -13,9 +17,9 @@
             {% endfor %}
         </div>
 
-                {% if not products %}
-                <h1 style="padding: 156px; display: flex; justify-content: center;">No results found.</h1>
-                {% endif %}
+                <!-- {% if not products %}
+                <h1 style="padding: 156px; display: flex; justify-content: center;"></h1>
+                {% endif %} -->
         
         {% else %}
         <h1 style="padding: 156px; display: flex; justify-content: center;">Oops! You're not searched anything.</h1>

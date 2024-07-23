@@ -3,13 +3,14 @@
 <div class="small-container">
     <div class="row row-2">
         <h2>All Products</h2>
-        <!-- <select>
-            <option>Default Sort</option>
-            <option>Sort By Price</option>
-            <option>Sort By Popularity</option>
-            <option>Sort By Rating</option>
-            <option>Sort By Sale</option>
-        </select> -->
+        <form method="get">
+            <select name="sort" onchange="this.form.submit()">
+                <option value="default" {% if request.GET.sort == 'default' %}selected{% endif %}>Sort by - Relevance</option>
+                <option value="low_price" {% if request.GET.sort == 'low_price' %}selected{% endif %}>Price - Low to High</option>
+                <option value="high_price" {% if request.GET.sort == 'high_price' %}selected{% endif %}>Price - High to Low</option>
+                <option value="newest" {% if request.GET.sort == 'newest' %}selected{% endif %}>Newest First</option>
+            </select>
+        </form>
     </div>
     {% for product_chunks in products|chunks:4 %}
     <div class="row">
