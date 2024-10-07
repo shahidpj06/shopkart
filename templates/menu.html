@@ -1,4 +1,5 @@
 {% load static %}
+
 <div class="navbar">
     <div class="logo">
         <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="logo" width="125px"></a>
@@ -25,12 +26,35 @@
             {% else %}
             <li><a href="{% url 'orders' %}">Orders</a></li>
             <li><a href="{% url 'cart_details' %}">My Cart</a></li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li>
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">Profile</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="{% url 'edit_profile' %}">Edit Profile</a>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+            </li>
             {% endif %}
         </ul>
     </nav>
-    <!-- {% if user.is_authenticated %}
-    <a href="{% url 'cart_details' %}"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
-    {% endif %}
-    <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()"> -->
 </div>
+
+<script>
+    function myFunction() {
+        document.getElementById('myDropdown').classList.toggle("show");
+    } 
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+            }
+        }
+    }
+</script>

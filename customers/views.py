@@ -1,8 +1,16 @@
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserChangeForm
+from django.urls import reverse_lazy
+from django.views import View, generic
 from django.contrib import messages
+from customers.forms import EditProfileForm
 from . models import Customer
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 def show_account(request):
     context = {}
@@ -47,6 +55,14 @@ def show_account(request):
 
     return render(request, 'account.html', context)
 
+
+class UserEditView(LoginRequiredMixin, generic.UpdateView):
+    form_class = EditProfileForm
+    template_name = 'profile.html'
+    success_url = reverse_lazy('home')
+
+    def get_object(self):
+        return self.request.user
 
 def sign_out(request):
     logout(request)
